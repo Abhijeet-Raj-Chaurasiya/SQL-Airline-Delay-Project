@@ -2,7 +2,7 @@
 
 > **SQL + PostgreSQL analysis of American Airlines departure performance, delay drivers, and operational patterns.**
 
-![Project Banner](Banner%20Skinny.png)
+![Project Banner](assets/images/Banner%20Skinny.png)
 
 ## Overview
 
@@ -101,27 +101,31 @@ DFW is the largest departure base in the 2023 dataset, followed by CLT and PHX. 
 SQL-Airline-Delay-Project/
 │
 ├── README.md
-├── Excel and SQL Quality Checks.md
-├── SQL Analysis Queries.md
+│
+├── docs/
+│   ├── Excel and SQL Quality Checks.md
+│   └── SQL Analysis Queries.md
 │
 ├── sql/
 │   ├── quality_checks.sql
 │   └── analysis_queries.sql
 │
-├── Banner Full Size.png
-├── Banner Skinny.png
-├── Describe Table.png
-├── Excel step 1.gif
-├── Excel step 3.gif
-├── Excel step 4.png
-├── Figure 1.png
-├── Figure 2.png
-├── Figure 3.png
-├── Figure 4.png
-├── Figure 5.png
-├── Figure 6.png
-├── Figure 7.png
-└── Figure 8.png
+└── assets/
+    └── images/
+        ├── Banner Full Size.png
+        ├── Banner Skinny.png
+        ├── Describe Table.png
+        ├── Excel step 1.gif
+        ├── Excel step 3.gif
+        ├── Excel step 4.png
+        ├── Figure 1.png
+        ├── Figure 2.png
+        ├── Figure 3.png
+        ├── Figure 4.png
+        ├── Figure 5.png
+        ├── Figure 6.png
+        ├── Figure 7.png
+        └── Figure 8.png
 ```
 
 ---
@@ -138,13 +142,13 @@ The documented quality checks identify records with:
 
 The source documentation reports an expected imported row count of **1,546,452** and approximately **32K irregular records** identified by these conditions.
 
-See [`Excel and SQL Quality Checks.md`](Excel%20and%20SQL%20Quality%20Checks.md) for the full preparation workflow.
+See [`docs/Excel and SQL Quality Checks.md`](docs/Excel%20and%20SQL%20Quality%20Checks.md) for the full preparation workflow.
 
 ---
 
 ## 🧪 SQL Analysis
 
-The complete business-question analysis is documented in [`SQL Analysis Queries.md`](SQL%20Analysis%20Queries.md).
+The complete business-question analysis is documented in [`docs/SQL Analysis Queries.md`](docs/SQL%20Analysis%20Queries.md).
 
 For easier reuse, the executable query set is also available in [`sql/analysis_queries.sql`](sql/analysis_queries.sql), while the data-quality SQL is available in [`sql/quality_checks.sql`](sql/quality_checks.sql).
 
@@ -164,7 +168,7 @@ These recommendations are derived from the project's observed delay patterns rat
 
 ## 📚 Data Source
 
-The underlying flight data was collected from the **Bureau of Transportation Statistics (BTS)** for American Airlines departure metrics covering 2022 through 2024. The source workflow and compiled-data location are documented in the original project materials.
+The underlying flight data was collected from the **Bureau of Transportation Statistics (BTS)** for American Airlines departure metrics covering 2022 through 2024. The source workflow and compiled-data location are documented in the project materials.
 
 > **Data availability note:** the documented dataset ends in **October 2024**, so 2024 is not a complete calendar year.
 
@@ -172,7 +176,7 @@ The underlying flight data was collected from the **Bureau of Transportation Sta
 
 ## 📈 Visual Evidence
 
-The repository includes the original analysis visuals supporting the SQL results, including:
+The repository includes the analysis visuals supporting the SQL results:
 
 - Fleet growth by year
 - Departures by airport base
@@ -187,7 +191,7 @@ The repository includes the original analysis visuals supporting the SQL results
 
 ## ⚠️ Assumptions & Limitations
 
-The project documentation notes several limitations, including incomplete 2024 coverage, difficulty tracing an individual aircraft across an entire operational day, and differences between departure-delay definitions used by airlines.
+The project documentation notes several limitations, including incomplete 2024 coverage, difficulty tracing an individual aircraft through an entire operational day, and differences between departure-delay definitions used by airlines.
 
 The analysis should therefore be interpreted as an **operational diagnostic**, not as a causal model.
 
@@ -195,8 +199,8 @@ The analysis should therefore be interpreted as an **operational diagnostic**, n
 
 ## 🔗 Project Resources
 
-- [Excel & SQL Quality Checks](Excel%20and%20SQL%20Quality%20Checks.md)
-- [SQL Analysis Queries](SQL%20Analysis%20Queries.md)
+- [Excel & SQL Quality Checks](docs/Excel%20and%20SQL%20Quality%20Checks.md)
+- [SQL Analysis Queries](docs/SQL%20Analysis%20Queries.md)
 - [Executable Analysis SQL](sql/analysis_queries.sql)
 - [Data Quality SQL](sql/quality_checks.sql)
 
