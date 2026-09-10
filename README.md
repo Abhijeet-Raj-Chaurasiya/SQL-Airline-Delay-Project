@@ -203,9 +203,3 @@ The analysis should therefore be interpreted as an **operational diagnostic**, n
 - [SQL Analysis Queries](docs/SQL%20Analysis%20Queries.md)
 - [Executable Analysis SQL](sql/analysis_queries.sql)
 - [Data Quality SQL](sql/quality_checks.sql)
-
----
-
-## Reference
-
-This project is based on the public **SQL Airline Delay Project** by Michael Zaniewski. The original project is used as the reference for the dataset workflow, analytical questions, SQL logic, and visual evidence; this repository reorganizes and presents those materials in a cleaner portfolio-oriented structure.
