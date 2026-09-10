@@ -1,100 +1,62 @@
-# ✈️ American Airlines Delay Analysis — SQL Portfolio Project
+![BannerSkinny](https://github.com/user-attachments/assets/0227b5ef-e000-4477-b5fd-357d38fb2937)
 
-An end-to-end SQL analytics project exploring American Airlines departure performance, delay patterns, airport operations, and controllable causes of late departures.
+# SQL-Airline-Delay-Project
 
-> **Learning project:** This repository is an independent implementation inspired by a public airline-delay SQL project. It is intended to demonstrate practical SQL, data-quality, analytical, and business-reasoning skills.
+An analysis of American Airlines' departure statistics to determine what and how the airline can optimize to achieve more on-time departures while balancing an enhanced customer experience.
 
-## 🎯 Business Objective
+## Background and Overview
+American Airlines, established in 1926, is the worlds largest Airline in terms of quantity of flights and passangers carried daily. This project is focused on American's nine largest hubs: DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
 
-The objective is to identify where and when departure delays occur, understand their major drivers, and translate the analysis into operational questions and recommendations.
+The goal is to determine the top causes for departure delays and provide business reccomendations utilizing actionable insights to mitigate delays in accordance with the airline's future endeavors of enhancing the customer experience on-board. 
 
-### Questions answered
+Insights and reccomendations are provided on the following key areas:
+- Analyzing departure count to determine relative presence at bases
+- Total delay per flight to extrapolate information such as total delay time per day of week
+- Matching type of delay to scheduled departure time to test time of day influence
+- Implementing a minimum-spare-parts list
+- A/B testing split-prioritiy tactic depnding on the time of day at DCA airport
+  
+  
+Excel strategies and SQL queries used to inspect, clean, and perform quality checks can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/Excel%20and%20SQL%20Quality%20Checks.md)
+ 
+Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md) 
 
-1. How many aircraft operated each year?
-2. Which hubs handled the most departures in 2023?
-3. What is the maximum observed delay for each delay category?
-4. Which flights experienced the largest reconstructed delays?
-5. What is the median delay by airport and delay category?
-6. Which weekday accumulated the most positive departure delay?
-7. How does on-time performance differ between morning and afternoon flights?
-8. Which controllable delay driver is more prominent by time of day?
+A long-form written report can be found [here](https://docs.google.com/document/d/1FbklT3wubcDVVe8UjOMpISShDmbYRQFbfnnLsYlv4DM/edit?usp=sharing)
 
-## 🧰 Tech Stack
+## Data Structure and Info
+The dataset for this project was gathered from the [Bureau of Transportation Statistics](https://www.transtats.bts.gov/ontime/departures.aspx) for all AA departure metrics in years 2022-2024. Statistics are generated per origin airport. Compiled datasets can be downloaded from a google drive folder [here](https://drive.google.com/drive/folders/149eeRoGHqdNVELTDj48WXwkjbDq19Gq3?usp=drive_link).
 
-- **PostgreSQL** — data storage and SQL analysis
-- **SQL** — cleaning, aggregation, CTEs, window functions, ranking and statistical analysis
-- **Excel / spreadsheet workflow** — optional source-data inspection
-- **GitHub** — version control and portfolio documentation
+|   column name       |     data type     |     column name       | data type           |   
+|  ------------------| ------------------| --------------------- |---------------------|           
+|         id          |     integer       |  actual_flt_time      | time                |
+|       date          |       date        |  departure_delay      | integer             |
+|       flight_number |character varying  |    wheels_up_time     | time                |
+|       tail_number   | character varying |     taxi_out_time     | integer             |
+|       origin        |character varying  |     carrier_delay     | integer             |
+|       destination   | character varying  | weather_delay         |  integer             |
+| scheduled_departure |       time        | national_aviation_sys_delay| integer      |
+| actual_departure    |       time        | security_delay        | integer             |
+| sched_flt_time      |       integer     | late_ac_arrival_delay | integer             |
 
-## 📁 Repository Structure
 
-```text
-SQL-Airline-Delay-Project/
-├── README.md
-├── sql/
-│   ├── 01_create_table.sql
-│   ├── 02_quality_checks.sql
-│   └── 03_analysis_queries.sql
-├── documentation/
-│   ├── data_dictionary.md
-│   └── methodology.md
-├── data/
-│   ├── raw/
-│   └── processed/
-└── visuals/
-```
+Prior to beginning the analysis, a variety of checks were conducted for quality control and familiarization with column relationships. The SQL queries used to inspect, clean, and perform quality checks can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/Excel%20and%20SQL%20Quality%20Checks.md).
 
-## 🗃️ Dataset
+## Executive Summary
+### Overview of Findings
+American Airline's departure dependability struggles most in the afternoon due to rolling delays caused by late aircraft arrivals stemming from carrier delays on morning flights. For years 2022-2024, 31.19% of morning flights were delayed, climbing to 50.44% in the afternoon, a ratio of 1:2.7 morning to evening late departures. Digging deeper, there is a correlation with this data and that of delays caused specificially by controllable metrics. In the mornings, carrier delays are most prevelant while the afternoon points to late aircraft arrivals as the number one cause of late departures. 
 
-The analytical scope follows American Airlines departure statistics from the U.S. Bureau of Transportation Statistics (BTS), covering 2022–2024. The reference analysis focuses on major American Airlines hubs including DFW, CLT, MIA, PHX, ORD, PHL, LAX, DCA, and JFK.
+### Findings:
+- American has instated 39 aircraft in 2023 and 17 in 2024 for a current fleet total of 971
+- Friday saw the highest total delay times with Tueday being the lowest
+- There are signficantly more departures in the afternoon than the morning
+- Of controllable delays, most are due to carrier delays in the mornings while flights in the afternoon are heavily swayed towards late aircraft arrivals
+- Late aircraft arrivals are the #1 cause of controllable late departues and have the highest maximum delay length of any delay, being the most detrimental adversary to on-time goals
 
-The repository intentionally does not claim quantitative findings until the underlying dataset is loaded and the queries are executed against it.
+Targeted SQL queries used to answer business questions and extract insights can be found [here](https://github.com/MichaelZaniewski/SQL-Airline-Delay-Project/blob/main/SQL%20Analysis%20Queries.md) 
+  
+### Reccomendations
+- AA should look to implement a split-priority tactic of ensuring on-time departures in the first half of the operational day to prevent rolling delays, while shifting to enhancing cabin appearance and consumer experience in the latter half of the day to impact the majority of customers
+- Longer carrier delays are typically due to extensive maintenance issues, therefore, a minimum spare parts list should be implimented to ensure each airport has the equiptment available to repair an aircraft, eliminating wait time for shipping
+- Create an A/B test using DCA base as the experimental group. DCA is a smaller base with less traffic making it easier to impliment a testing strategy. It is also one of the bases struggling most with controllable delays, allowing results to be readily apparent
 
-## 🔍 Data Quality Approach
 
-Before analysis, the project checks:
-
-- Missing `tail_number` values
-- Zero `actual_flt_time`
-- Zero `taxi_out_time`
-- Negative values in delay-category fields
-- Duplicate business records
-- Overall row counts and basic delay ranges
-
-Negative `departure_delay` values are retained because they represent flights that departed early rather than data errors.
-
-## 📊 SQL Techniques Demonstrated
-
-- `COUNT()` and `COUNT(DISTINCT ...)`
-- `SUM()`, `MAX()`, `GREATEST()`
-- `CASE WHEN`
-- `FILTER`
-- `COALESCE()`
-- `PERCENTILE_CONT()` for median analysis
-- `RANK()` and `LAG()` window functions
-- `GROUP BY` / `HAVING`
-- Common Table Expressions (CTEs)
-- Date/time extraction and formatting
-
-## 💡 Portfolio Value
-
-This project demonstrates a complete analytics workflow rather than isolated SQL exercises:
-
-**Raw data → quality checks → relational schema → analytical SQL → operational insights → business recommendations**
-
-## 🚀 Future Enhancements
-
-- Add an interactive Power BI/Tableau dashboard
-- Add automated data-quality tests
-- Build airport-level delay KPIs
-- Analyze monthly and seasonal trends
-- Add route-level performance analysis
-- Create an executive operations dashboard
-
-## 📚 Reference
-
-The project structure and problem framing were inspired by the public repository used for learning and comparison:
-
-`MichaelZaniewski/SQL-Airline-Delay-Project`
-
-The implementation in this repository is independently organized and should be validated against the actual source data before quantitative conclusions are published.
