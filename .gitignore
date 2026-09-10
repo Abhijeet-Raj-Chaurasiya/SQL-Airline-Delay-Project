@@ -1,0 +1,19 @@
+# Local / OS files
+.DS_Store
+Thumbs.db
+
+# Python / notebooks (if used for exploration)
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local datasets and database exports
+*.csv
+*.csv.gz
+*.parquet
+*.sqlite
+*.db
+
+# Local environment files
+.env
+.env.*

@@ -1,6 +1,6 @@
 ## EXPLORATORY ANALYSIS
 ### 1) How many planes did AA operate each year?
-![Figure1](https://github.com/user-attachments/assets/3593d1cd-d31d-4db6-8076-bd3da590cec7)
+![Figure1](../assets/images/Figure%201.png)
 - **Functions:** Utilized COUNT() function, DISTINCT clause to aggregate a count of total planes. Then, created a LAG() window function to show changes over time and improve readability
 - **Insights Gained:** AA instated 39 planes in 2023 and 17 in 2024 
 ```
@@ -13,7 +13,7 @@ GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY YEAR;
 ```
 ### 2) How many departures from each base did AA operate in 2023? 
-![Figure2](https://github.com/user-attachments/assets/af14b2fe-0a6c-482f-866f-3c39e10ce529)
+![Figure2](../assets/images/Figure%202.png)
 - **Methodology:** Aggregated a year column using EXTRACT() function, COUNT() to see total_departures, allowing viewers to gain a relative understanding of airline presence per airport. Ranked for easy viewing ability 
 - **Insights Gained:** AA has the largest presence in DFW by far, and the smallest in JFK  
 ```
@@ -27,7 +27,7 @@ GROUP BY year, origin
 ORDER BY total_departures DESC;
 ```
 ### 3) What was the maximum time for each category of delay?
-![Figure3](https://github.com/user-attachments/assets/65c2495e-f904-4094-8542-d18de3cd35ce)
+![Figure3](../assets/images/Figure%203.png)
 - **Methodology:** MAX() function to return information on maximum recorded delay to determine how comparing controllable and uncontrollable delays affect departure dependability
 - **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
 - **NOTE:** `taxi_time` is not denoted as a delay. Every aircraft **has** to have a taxi time, and excess taxi time is recorded under a delay category. Regardless, it is still an interesting metric to pull
@@ -43,7 +43,7 @@ FROM delay;
 ```
 ## DIGGING DEEPER
 ### 4) What were the top 5 most delayed flights and their primary cause?
-![Image](https://github.com/user-attachments/assets/025a1219-b698-4f95-a34e-c9b2d335cd8a)
+![Figure4](../assets/images/Figure%204.png)
 - **Methodology:** Utilized subqueries, CASE statements along with SUM(), ABS(), FILTER(), and COALESCE() functions to aggregate a `total_delay` column, accounting for categorically unlisted delays before gate-pushback. Then, applied ORDER BY and LIMIT statements, allowing a viewer to see details of most delayed flights in the dataset
 - **Insights Gained:** The highest recorded delay is attributed to a late aircraft arrival, followed very closely by carrier delay
 ```
@@ -71,7 +71,7 @@ ORDER BY total_delay DESC, late_ac_arrival_delay DESC
 LIMIT 5;
 ```
 ### 5) What was the median delay length for each delay category per base for only situations where there was a delay? Bases are ranked from most to least delayed.
-![Figure5](https://github.com/user-attachments/assets/00b29b96-4ffd-43d5-9008-7a9e35e774d9)
+![Figure5](../assets/images/Figure%205.png)
 - **Methodology:** PERCENTILE_CONT() function to aggregate the median while using FILTER to remove zero values, ensure accurate and insightful data is returned
 - **Insights Gained:** Most bases, with the exceptions of PHL and LAX, see the highest median delays attributed to late aircraft arrivals
 ```
@@ -97,7 +97,7 @@ GROUP BY origin, mdn_dept_dly, mdn_carrier_dly, mdn_weather_dly, mdn_atc_dly, md
 ORDER BY total_mdn_dly DESC);
 ```
 ### 6) What day of the week saw the longest delays?
-![Figure6](https://github.com/user-attachments/assets/d6b3171c-ed14-4322-92e2-6f7e12be7e66)
+![Figure6](../assets/images/Figure%206.png)
 - **Methodology:** Querying off the aggregated `total_delay` column generated previously, use TO_CHAR to compose `day of week` and GROUP BY it to illustrate which days of the week saw the longest delays
 - **Insights Gained:** Friday saw the longest total delays while tuesday saw the least
 ```
@@ -126,7 +126,7 @@ GROUP BY day_of_week
 ORDER BY total_delay_time DESC;
 ```
 ### 7) Of the total flights, how many left in the morning vs afternoon? What percent of morning and afternoon flights departed on time vs late?
-![Figure7](https://github.com/user-attachments/assets/7c15d4d4-447b-45d7-a2b9-f61f34a3606f)
+![Figure7](../assets/images/Figure%207.png)
 - **Methodology:** Created a subquery CASE statement to categorize `sched_departure` into 'MORNING' and 'AFTERNOON', then COUNT() flights on-time and late, column division by total, and GROUP BY `time_of_day` to get percentages per time period. Allows for easy data interpretation of departure statistics 
 - **Insights Gained:** 30.19% of flights depart late in the morning, quickly increasing to 50.44% by the afternoon
 ```
@@ -145,7 +145,7 @@ GROUP BY time_of_day
 ORDER BY total_flights ASC;
 ```
 ### 8) Of the flights that departed late, what percentage were mostly attributed to late aircraft delays and carrier delays for morning and afternoon departures?
-![Figure8](https://github.com/user-attachments/assets/c46c364e-e4b5-49f8-a643-3b8a79a2f65c)
+![Figure8](../assets/images/Figure%208.png)
 - **Methodology:** Calling back the same subquery, COUNT rows where either `carrier_delay` or `late_ac_arrival_delay` are greater and divide by total delayed flights and use TO_CHAR TO convert to percentage to achieve actionable insights on controllable delays
 - **Insights Gained:** Digging deeper into percentages of controllable departure metrics, AA struggles most with carrier delays in the mornings and late aircraft arrivals in the afternoon. These numbers insinuate that early carrier delays play a part in creating late afternoon arrivals as the plane attempts to continue its route through the day
 ```
@@ -164,4 +164,3 @@ FROM	(SELECT *,
 GROUP BY time_of_day 
 ORDER BY count_delayed_departures ASC;
 ```
-
