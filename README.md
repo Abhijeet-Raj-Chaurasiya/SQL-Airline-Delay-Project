@@ -84,7 +84,7 @@ DFW is the largest departure base in the 2023 dataset, followed by CLT and PHX. 
 - Conditional aggregation with `FILTER`
 - Percentiles with `PERCENTILE_CONT`
 - Date/time extraction and formatting
-- Nested subqueries and calculated metrics
+- CTEs and calculated metrics
 
 **Data preparation**
 - Excel formatting and inspection
@@ -101,10 +101,13 @@ DFW is the largest departure base in the 2023 dataset, followed by CLT and PHX. 
 SQL-Airline-Delay-Project/
 │
 ├── README.md
+├── .gitignore
 │
 ├── docs/
 │   ├── Excel and SQL Quality Checks.md
-│   └── SQL Analysis Queries.md
+│   ├── SQL Analysis Queries.md
+│   ├── analysis_workflow.md
+│   └── data_dictionary.md
 │
 ├── sql/
 │   ├── quality_checks.sql
@@ -146,11 +149,26 @@ See [`docs/Excel and SQL Quality Checks.md`](docs/Excel%20and%20SQL%20Quality%20
 
 ---
 
+## 🔬 Analysis Workflow
+
+The project moves through four practical stages: **prepare → validate → analyze → interpret**.
+
+1. **Prepare** the source records in Excel and standardize the fields required for SQL import.
+2. **Validate** the PostgreSQL table and review irregular records before calculating metrics.
+3. **Analyze** the eight business questions using focused SQL queries and statistical functions.
+4. **Interpret** the results using the supporting figures and translate the strongest patterns into operational recommendations.
+
+A step-by-step reproducibility checklist is available in [`docs/analysis_workflow.md`](docs/analysis_workflow.md), and the field-level definitions are documented in [`docs/data_dictionary.md`](docs/data_dictionary.md).
+
+---
+
 ## 🧪 SQL Analysis
 
 The complete business-question analysis is documented in [`docs/SQL Analysis Queries.md`](docs/SQL%20Analysis%20Queries.md).
 
 For easier reuse, the executable query set is also available in [`sql/analysis_queries.sql`](sql/analysis_queries.sql), while the data-quality SQL is available in [`sql/quality_checks.sql`](sql/quality_checks.sql).
+
+The SQL is organized so the data-quality checks can be run first, followed by the eight analytical questions.
 
 ---
 
@@ -201,5 +219,7 @@ The analysis should therefore be interpreted as an **operational diagnostic**, n
 
 - [Excel & SQL Quality Checks](docs/Excel%20and%20SQL%20Quality%20Checks.md)
 - [SQL Analysis Queries](docs/SQL%20Analysis%20Queries.md)
+- [Analysis Workflow](docs/analysis_workflow.md)
+- [Data Dictionary](docs/data_dictionary.md)
 - [Executable Analysis SQL](sql/analysis_queries.sql)
 - [Data Quality SQL](sql/quality_checks.sql)
